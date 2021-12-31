@@ -8,6 +8,7 @@ func main() {
 	name := "Dafrin"
 	const tiket int = 50
 	var remainingTickets uint = 50
+	var bookings [50]string
 
 	fmt.Printf("Hello World %v\n", name)
 	fmt.Printf("Tiket untuk nonton bola: %v\n", tiket)
@@ -30,6 +31,12 @@ func main() {
 	fmt.Scan(&userTiket)
 
 	remainingTickets = remainingTickets - uint(userTiket)
+	bookings[0] = firstName + " " + lastname
+
+	fmt.Printf("Array: %v\n", bookings)
+	fmt.Printf("First Value: %v\n", bookings[0])
+	fmt.Printf("Array type: %T\n", bookings)
+	fmt.Printf("Array length: %v\n", len(bookings))
 
 	userTiket = 50
 	fmt.Printf("Thank you %v %v for booking %v tickets. You will receive a confirmation eamil at %v\n",
