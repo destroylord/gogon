@@ -1,6 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"strings"
+)
 
 func main() {
 
@@ -13,35 +16,45 @@ func main() {
 	fmt.Printf("Hello World %v\n", name)
 	fmt.Printf("Tiket untuk nonton bola: %v\n", tiket)
 
-	var firstName string
-	var lastname string
-	var email string
-	var userTiket uint
+	for {
 
-	fmt.Printf("Enter your first name: ")
-	fmt.Scan(&firstName)
+		var firstName string
+		var lastname string
+		var email string
+		var userTiket uint
 
-	fmt.Printf("Enter your last name: ")
-	fmt.Scan(&lastname)
+		fmt.Printf("Enter your first name: ")
+		fmt.Scan(&firstName)
 
-	fmt.Printf("Enter your email: ")
-	fmt.Scan(&email)
+		fmt.Printf("Enter your last name: ")
+		fmt.Scan(&lastname)
 
-	fmt.Printf("Enter number of ticket: ")
-	fmt.Scan(&userTiket)
+		fmt.Printf("Enter your email: ")
+		fmt.Scan(&email)
 
-	remainingTickets = remainingTickets - uint(userTiket)
-	bookings = append(bookings, firstName+" "+lastname)
+		fmt.Printf("Enter number of ticket: ")
+		fmt.Scan(&userTiket)
 
-	fmt.Printf("Slice: %v\n", bookings)
-	fmt.Printf("First Value: %v\n", bookings[0])
-	fmt.Printf("Slice type: %T\n", bookings)
-	fmt.Printf("Slice length: %v\n", len(bookings))
+		remainingTickets = remainingTickets - uint(userTiket)
+		bookings = append(bookings, firstName+" "+lastname)
 
-	userTiket = 50
-	fmt.Printf("Thank you %v %v for booking %v tickets. You will receive a confirmation eamil at %v\n",
-		firstName, lastname, userTiket, email)
-	fmt.Printf("%v tickets remaining for %v\n", remainingTickets, name)
+		fmt.Printf("Slice: %v\n", bookings)
+		fmt.Printf("First Value: %v\n", bookings[0])
+		fmt.Printf("Slice type: %T\n", bookings)
+		fmt.Printf("Slice length: %v\n", len(bookings))
 
-	fmt.Print("These are all our bookings: %v\n", bookings)
+		userTiket = 50
+		fmt.Printf("Thank you %v %v for booking %v tickets. You will receive a confirmation eamil at %v\n",
+			firstName, lastname, userTiket, email)
+		fmt.Printf("%v tickets remaining for %v\n", remainingTickets, name)
+
+		firstNames := []string{}
+		for _, booking := range bookings {
+			var names = strings.Fields(booking)
+			var firstName = names[0]
+			firstNames = append(firstNames, firstName)
+		}
+		fmt.Printf("There first names of bookings are: %v\n", firstNames)
+
+	}
 }
