@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"gogon/helper"
+	"time"
 )
 
 const confTicket int = 50
@@ -38,6 +39,7 @@ func main() {
 
 			// call books ticket
 			bookTicket(userTiket, firstName, lastname, email)
+			go sendTicket(userTiket, firstName, lastname, email)
 
 			// call function print first name
 			firstNames := getFirstName()
@@ -129,4 +131,12 @@ func bookTicket(userTiket uint, firstName string, lastname string, email string)
 	fmt.Printf("Thank you %v %v for booking %v tickets. You will receive a confirmation eamil at %v\n",
 		firstName, lastname, userTiket, email)
 	fmt.Printf("%v tickets remaining for %v\n", remainingTickets, name)
+}
+
+func sendTicket(userTiket uint, firstName string, lastname string, email string) {
+	time.Sleep(10 * time.Second)
+	var ticket = fmt.Sprintf("%v tickets for %v %v\n", userTiket, firstName, lastname)
+	fmt.Println("###############")
+	fmt.Printf("Sending tiket:\n %v \nto email address %v\n", ticket, email)
+	fmt.Println("###############")
 }
