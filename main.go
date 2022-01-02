@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 	"gogon/helper"
-	"strings"
+	"strconv"
 )
 
 const confTicket int = 50
@@ -13,7 +13,7 @@ var name = "Dafrin"
 const tiket int = 50
 
 var remainingTickets uint = 50
-var bookings = []string{}
+var bookings = make([]map[string]string, 0)
 
 func main() {
 
@@ -70,9 +70,8 @@ func greetUsers() {
 func getFirstName() []string {
 	firstNames := []string{}
 	for _, booking := range bookings {
-		var names = strings.Fields(booking)
-		var firstName = names[0]
-		firstNames = append(firstNames, firstName)
+
+		firstNames = append(firstNames, booking["firstName"])
 	}
 	// fmt.Printf("There first names of bookings are: %v\n", firstNames)
 
@@ -104,9 +103,18 @@ func getUserInput() (string, string, string, uint) {
 
 func bookTicket(userTiket uint, firstName string, lastname string, email string) {
 	remainingTickets = remainingTickets - uint(userTiket)
-	bookings = append(bookings, firstName+" "+lastname)
 
-	userTiket = 50
+	// create a map for a user
+
+	var userData = make(map[string]string)
+	userData["firstname"] = firstName
+	userData["lastname"] = lastname
+	userData["email"] = email
+	userData["numberOfTickets"] = strconv.FormatUint(uint64(userTiket), 10)
+
+	bookings = append(bookings, userData)
+	fmt.Printf("List of Bookings is %v\n", bookings)
+
 	fmt.Printf("Thank you %v %v for booking %v tickets. You will receive a confirmation eamil at %v\n",
 		firstName, lastname, userTiket, email)
 	fmt.Printf("%v tickets remaining for %v\n", remainingTickets, name)
