@@ -3,7 +3,6 @@ package main
 import (
 	"fmt"
 	"gogon/helper"
-	"strconv"
 )
 
 const confTicket int = 50
@@ -13,7 +12,14 @@ var name = "Dafrin"
 const tiket int = 50
 
 var remainingTickets uint = 50
-var bookings = make([]map[string]string, 0)
+var bookings = make([]UserData, 0)
+
+type UserData struct {
+	firstName       string
+	lastname        string
+	email           string
+	numberOfTickets uint
+}
 
 func main() {
 
@@ -71,7 +77,7 @@ func getFirstName() []string {
 	firstNames := []string{}
 	for _, booking := range bookings {
 
-		firstNames = append(firstNames, booking["firstName"])
+		firstNames = append(firstNames, booking.firstName)
 	}
 	// fmt.Printf("There first names of bookings are: %v\n", firstNames)
 
@@ -106,11 +112,16 @@ func bookTicket(userTiket uint, firstName string, lastname string, email string)
 
 	// create a map for a user
 
-	var userData = make(map[string]string)
-	userData["firstname"] = firstName
-	userData["lastname"] = lastname
-	userData["email"] = email
-	userData["numberOfTickets"] = strconv.FormatUint(uint64(userTiket), 10)
+	var userData = UserData{
+		firstName:       firstName,
+		lastname:        lastname,
+		email:           email,
+		numberOfTickets: userTiket,
+	}
+	// userData["firstname"] = firstName
+	// userData["lastname"] = lastname
+	// userData["email"] = email
+	// userData["numberOfTickets"] = strconv.FormatUint(uint64(userTiket), 10)
 
 	bookings = append(bookings, userData)
 	fmt.Printf("List of Bookings is %v\n", bookings)
