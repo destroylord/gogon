@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"gogon/helper"
 	"strings"
 )
 
@@ -25,7 +26,7 @@ func main() {
 		// call function getUserInput
 		firstName, lastname, email, userTiket := getUserInput()
 		// call function validation
-		isValidName, isValidEmail, isValidTicketNumber := validateUserInput(firstName, lastname, email, userTiket)
+		isValidName, isValidEmail, isValidTicketNumber := helper.ValidateUserInput(firstName, lastname, email, userTiket, remainingTickets)
 
 		if isValidName && isValidEmail && isValidTicketNumber {
 
@@ -78,13 +79,7 @@ func getFirstName() []string {
 	return firstNames
 }
 
-func validateUserInput(firstName string, lastname string, email string, userTiket uint) (bool, bool, bool) {
-	isValidName := len(firstName) >= 2 && len(lastname) >= 2
-	isValidEmail := strings.Contains(email, "@")
-	isValidTicketNumber := userTiket > 0 && userTiket <= remainingTickets
-
-	return isValidName, isValidEmail, isValidTicketNumber
-}
+// validate
 
 func getUserInput() (string, string, string, uint) {
 	var firstName string
